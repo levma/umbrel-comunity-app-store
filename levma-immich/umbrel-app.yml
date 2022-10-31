@@ -1,0 +1,23 @@
+manifestVersion: 1
+id: levma-immich
+category: Files
+name: Immich
+version: "1.33.0_52-dev"
+tagline: High performance self-hosted photo and video backup solution.
+description: >-
+  An open source, high performance self-hosted backup solution for videos and photos on your mobile phone
+releaseNotes: ""
+developer: Alex Tran
+website: https://www.immich.app
+dependencies: []
+repo: https://github.com/immich-app/immich
+support: https://github.com/immich-app/immich/discussions
+port: 2283
+icon: https://immich.app/immich-logo.svg
+gallery:
+  - https://github.com/immich-app/immich/raw/main/design/web-home.jpeg
+  - https://github.com/immich-app/immich/raw/main/design/web-detail.jpeg
+  - https://imgur.com/a/GxCMgN0
+path: ""
+defaultUsername: ""
+defaultPassword: ""

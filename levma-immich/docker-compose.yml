@@ -1,0 +1,129 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: levma-immich-proxy
+      APP_PORT: 8080
+      PROXY_AUTH_ADD: "false"
+
+  immich-server:
+    container_name: levma-immich-server
+    hostname: levma-immich-server
+    image: "altran1502/immich-server:${APP_IMMICH_VERSION}"
+    entrypoint: ["/bin/sh", "./start-server.sh"]
+    volumes:
+      - ${APP_DATA_DIR}/upload:/usr/src/app/upload
+    environment:
+      NODE_ENV: production
+      DB_HOSTNAME: levma-immich-postgres
+      DB_USERNAME: ${APP_IMMICH_DB_USERNAME}
+      DB_PASSWORD: ${APP_IMMICH_DB_PASSWORD}
+      DB_DATABASE_NAME: ${APP_IMMICH_DB_DATABASE_NAME}
+      REDIS_HOSTNAME: levma-immich-redis
+      LOG_LEVEL: ${APP_IMMICH_LOG_LEVEL}
+      JWT_SECRET: ${APP_SEED}
+      DISABLE_REVERSE_GEOCODING: ${APP_IMMICH_DISABLE_REVERSE_GEOCODING}
+      REVERSE_GEOCODING_PRECISION: ${APP_IMMICH_REVERSE_GEOCODING_PRECISION}
+      PUBLIC_LOGIN_PAGE_MESSAGE: ${APP_IMMICH_PUBLIC_LOGIN_PAGE_MESSAGE}
+    depends_on:
+      - redis
+      - postgres
+    restart: always
+
+  immich-microservices:
+    container_name: levma-immich-microservices
+    hostname: levma-immich-microservices
+    image: "altran1502/immich-server:${APP_IMMICH_VERSION}"
+    entrypoint: ["/bin/sh", "./start-microservices.sh"]
+    volumes:
+      - ${APP_DATA_DIR}/upload:/usr/src/app/upload
+    environment:
+      NODE_ENV: production
+      DB_HOSTNAME: levma-immich-postgres
+      DB_USERNAME: ${APP_IMMICH_DB_USERNAME}
+      DB_PASSWORD: ${APP_IMMICH_DB_PASSWORD}
+      DB_DATABASE_NAME: ${APP_IMMICH_DB_DATABASE_NAME}
+      REDIS_HOSTNAME: levma-immich-redis
+      LOG_LEVEL: ${APP_IMMICH_LOG_LEVEL}
+      JWT_SECRET: ${APP_SEED}
+      DISABLE_REVERSE_GEOCODING: ${APP_IMMICH_DISABLE_REVERSE_GEOCODING}
+      REVERSE_GEOCODING_PRECISION: ${APP_IMMICH_REVERSE_GEOCODING_PRECISION}
+      PUBLIC_LOGIN_PAGE_MESSAGE: ${APP_IMMICH_PUBLIC_LOGIN_PAGE_MESSAGE}
+    depends_on:
+      - redis
+      - postgres
+    restart: always
+
+  immich-machine-learning:
+    container_name: levma-immich-machine-learning
+    hostname: levma-immich-machine-learning
+    image: "altran1502/immich-machine-learning:${APP_IMMICH_VERSION}"
+    entrypoint: ["/bin/sh", "./entrypoint.sh"]
+    volumes:
+      - ${APP_DATA_DIR}/upload:/usr/src/app/upload
+    environment:
+      NODE_ENV: production
+      DB_HOSTNAME: levma-immich-postgres
+      DB_USERNAME: ${APP_IMMICH_DB_USERNAME}
+      DB_PASSWORD: ${APP_IMMICH_DB_PASSWORD}
+      DB_DATABASE_NAME: ${APP_IMMICH_DB_DATABASE_NAME}
+      REDIS_HOSTNAME: levma-immich-redis
+      LOG_LEVEL: ${APP_IMMICH_LOG_LEVEL}
+      JWT_SECRET: ${APP_SEED}
+      DISABLE_REVERSE_GEOCODING: ${APP_IMMICH_DISABLE_REVERSE_GEOCODING}
+      REVERSE_GEOCODING_PRECISION: ${APP_IMMICH_REVERSE_GEOCODING_PRECISION}
+      PUBLIC_LOGIN_PAGE_MESSAGE: ${APP_IMMICH_PUBLIC_LOGIN_PAGE_MESSAGE}
+    depends_on:
+      - postgres
+    restart: always
+
+  immich-web:
+    container_name: levma-immich-web
+    hostname: levma-immich-web
+    image: "altran1502/immich-web:${APP_IMMICH_VERSION}"
+    entrypoint: ["/bin/sh", "./entrypoint.sh"]
+    environment:
+      DB_HOSTNAME: levma-immich-postgres
+      DB_USERNAME: ${APP_IMMICH_DB_USERNAME}
+      DB_PASSWORD: ${APP_IMMICH_DB_PASSWORD}
+      DB_DATABASE_NAME: ${APP_IMMICH_DB_DATABASE_NAME}
+      REDIS_HOSTNAME: levma-immich-redis
+      LOG_LEVEL: ${APP_IMMICH_LOG_LEVEL}
+      JWT_SECRET: ${APP_SEED}
+      DISABLE_REVERSE_GEOCODING: ${APP_IMMICH_DISABLE_REVERSE_GEOCODING}
+      REVERSE_GEOCODING_PRECISION: ${APP_IMMICH_REVERSE_GEOCODING_PRECISION}
+      PUBLIC_LOGIN_PAGE_MESSAGE: ${APP_IMMICH_PUBLIC_LOGIN_PAGE_MESSAGE}
+    restart: always
+
+  redis:
+    container_name: levma-immich-redis
+    hostname: levma-immich-redis
+    image: redis:6.2
+    restart: always
+
+  postgres:
+    container_name: levma-immich-postgres
+    hostname: levma-immich-postgres
+    image: postgres:14
+    user: "1000:1000"
+    environment:
+      POSTGRES_USER: ${APP_IMMICH_DB_USERNAME}
+      POSTGRES_PASSWORD: ${APP_IMMICH_DB_PASSWORD}
+      POSTGRES_DB: ${APP_IMMICH_DB_DATABASE_NAME}
+      PG_DATA: /var/lib/postgresql/data
+    volumes:
+      - ${APP_DATA_DIR}/pgdata:/var/lib/postgresql/data
+    restart: always
+
+  immich-proxy:
+    container_name: levma-immich-proxy
+    hostname: levma-immich-proxy
+    image: altran1502/immich-proxy:release
+    # expose:
+    #   - 8080
+    logging:
+      driver: none
+    depends_on:
+      - immich-server
+    restart: always
