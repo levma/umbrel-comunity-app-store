@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: ${APP_LEVMA_DECONZ_HOST}
+      APP_PORT: ${APP_LEVMA_DECONZ_WEB_PORT}
+      PROXY_AUTH_ADD: "false"
+
+  deconz:
+    image: "deconzcommunity/deconz:${APP_LEVMA_DECONZ_VERSION}"
+    container_name: levma-deconz
+    hostname: ${APP_LEVMA_DECONZ_HOST}
+    restart: always
+    privileged: true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /${APP_DATA_DIR}/data:/opt/deCONZ
+    devices:
+      - "${APP_LEVMA_DECONZ_DEVICE}"
+    environment:
+      DECONZ_WEB_PORT: ${APP_LEVMA_DECONZ_WEB_PORT}
+      DECONZ_WS_PORT: ${APP_LEVMA_DECONZ_WS_PORT}
+      DEBUG_INFO: 1
+      DEBUG_APS: 0
+      DEBUG_ZCL: 0
+      DEBUG_ZDP: 0
+      DEBUG_OTA: 0
+      DEBUG_HTTP: 0
+      DECONZ_DEVICE: ${APP_LEVMA_DECONZ_DEVICE}
+      DECONZ_START_VERBOSE: 0

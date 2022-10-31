@@ -1,0 +1,27 @@
+manifestVersion: 1
+id: levma-deconz
+category: Automation
+name: deCONZ
+version: "2.19.01"
+tagline: Control software for Zigbee networks
+description: >-
+  deCONZ is an easy to use control software, with which you can set up and control Zigbee networks of any size without further programming effort.
+
+  With the PC-based platform-independent application, you can easily and uncomplicated record all nodes in a network. All basic node information, the endpoints and their clusters are automatically read out and graphically displayed. Each node is controlled via the graphical user interface. You can easily create bindings using "Drag and Drop". The network can also be controlled via the Internet via a remote connection.
+
+  Thanks to the generic application core, the software tool can be used for practically all Zigbee application profiles. Application specifications such as devices, profiles and clusters are described in an XML file. New devices or profiles can easily be added to this XML file and used without any changes to the application. The corresponding nodes are also completely graphically controlled.
+releaseNotes: ""
+developer: Dresden Elektronik
+website: https://www.dresden-elektronik.com/wireless/software/deconz.html
+dependencies: []
+repo: https://github.com/deconz-community/deconz-docker
+support: ""
+port: 8183
+icon: https://www.dresden-elektronik.com/assets/images/7/logo-d8637469.svg
+gallery:
+  - https://www.dresden-elektronik.com/files/dresden-elektronik/content/funktechnik/deCONZ_identify.png
+  - https://www.dresden-elektronik.com/files/dresden-elektronik/content/funktechnik/deCONZ_nodes1.png
+  - https://www.dresden-elektronik.com/files/dresden-elektronik/content/funktechnik/deCONZ_nodes2.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
