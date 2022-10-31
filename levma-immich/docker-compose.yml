@@ -10,22 +10,22 @@ services:
   immich-server:
     container_name: levma-immich-server
     hostname: levma-immich-server
-    image: "altran1502/immich-server:${APP_IMMICH_VERSION}"
+    image: "altran1502/immich-server:${APP_LEVMA_IMMICH_VERSION}"
     entrypoint: ["/bin/sh", "./start-server.sh"]
     volumes:
       - ${APP_DATA_DIR}/upload:/usr/src/app/upload
     environment:
       NODE_ENV: production
       DB_HOSTNAME: levma-immich-postgres
-      DB_USERNAME: ${APP_IMMICH_DB_USERNAME}
-      DB_PASSWORD: ${APP_IMMICH_DB_PASSWORD}
-      DB_DATABASE_NAME: ${APP_IMMICH_DB_DATABASE_NAME}
+      DB_USERNAME: ${APP_LEVMA_IMMICH_DB_USERNAME}
+      DB_PASSWORD: ${APP_LEVMA_IMMICH_DB_PASSWORD}
+      DB_DATABASE_NAME: ${APP_LEVMA_IMMICH_DB_DATABASE_NAME}
       REDIS_HOSTNAME: levma-immich-redis
-      LOG_LEVEL: ${APP_IMMICH_LOG_LEVEL}
+      LOG_LEVEL: ${APP_LEVMA_IMMICH_LOG_LEVEL}
       JWT_SECRET: ${APP_SEED}
-      DISABLE_REVERSE_GEOCODING: ${APP_IMMICH_DISABLE_REVERSE_GEOCODING}
-      REVERSE_GEOCODING_PRECISION: ${APP_IMMICH_REVERSE_GEOCODING_PRECISION}
-      PUBLIC_LOGIN_PAGE_MESSAGE: ${APP_IMMICH_PUBLIC_LOGIN_PAGE_MESSAGE}
+      DISABLE_REVERSE_GEOCODING: ${APP_LEVMA_IMMICH_DISABLE_REVERSE_GEOCODING}
+      REVERSE_GEOCODING_PRECISION: ${APP_LEVMA_IMMICH_REVERSE_GEOCODING_PRECISION}
+      PUBLIC_LOGIN_PAGE_MESSAGE: ${APP_LEVMA_IMMICH_PUBLIC_LOGIN_PAGE_MESSAGE}
     depends_on:
       - redis
       - postgres
@@ -34,22 +34,22 @@ services:
   immich-microservices:
     container_name: levma-immich-microservices
     hostname: levma-immich-microservices
-    image: "altran1502/immich-server:${APP_IMMICH_VERSION}"
+    image: "altran1502/immich-server:${APP_LEVMA_IMMICH_VERSION}"
     entrypoint: ["/bin/sh", "./start-microservices.sh"]
     volumes:
       - ${APP_DATA_DIR}/upload:/usr/src/app/upload
     environment:
       NODE_ENV: production
       DB_HOSTNAME: levma-immich-postgres
-      DB_USERNAME: ${APP_IMMICH_DB_USERNAME}
-      DB_PASSWORD: ${APP_IMMICH_DB_PASSWORD}
-      DB_DATABASE_NAME: ${APP_IMMICH_DB_DATABASE_NAME}
+      DB_USERNAME: ${APP_LEVMA_IMMICH_DB_USERNAME}
+      DB_PASSWORD: ${APP_LEVMA_IMMICH_DB_PASSWORD}
+      DB_DATABASE_NAME: ${APP_LEVMA_IMMICH_DB_DATABASE_NAME}
       REDIS_HOSTNAME: levma-immich-redis
-      LOG_LEVEL: ${APP_IMMICH_LOG_LEVEL}
+      LOG_LEVEL: ${APP_LEVMA_IMMICH_LOG_LEVEL}
       JWT_SECRET: ${APP_SEED}
-      DISABLE_REVERSE_GEOCODING: ${APP_IMMICH_DISABLE_REVERSE_GEOCODING}
-      REVERSE_GEOCODING_PRECISION: ${APP_IMMICH_REVERSE_GEOCODING_PRECISION}
-      PUBLIC_LOGIN_PAGE_MESSAGE: ${APP_IMMICH_PUBLIC_LOGIN_PAGE_MESSAGE}
+      DISABLE_REVERSE_GEOCODING: ${APP_LEVMA_IMMICH_DISABLE_REVERSE_GEOCODING}
+      REVERSE_GEOCODING_PRECISION: ${APP_LEVMA_IMMICH_REVERSE_GEOCODING_PRECISION}
+      PUBLIC_LOGIN_PAGE_MESSAGE: ${APP_LEVMA_IMMICH_PUBLIC_LOGIN_PAGE_MESSAGE}
     depends_on:
       - redis
       - postgres
@@ -58,22 +58,22 @@ services:
   immich-machine-learning:
     container_name: levma-immich-machine-learning
     hostname: levma-immich-machine-learning
-    image: "altran1502/immich-machine-learning:${APP_IMMICH_VERSION}"
+    image: "altran1502/immich-machine-learning:${APP_LEVMA_IMMICH_VERSION}"
     entrypoint: ["/bin/sh", "./entrypoint.sh"]
     volumes:
       - ${APP_DATA_DIR}/upload:/usr/src/app/upload
     environment:
       NODE_ENV: production
       DB_HOSTNAME: levma-immich-postgres
-      DB_USERNAME: ${APP_IMMICH_DB_USERNAME}
-      DB_PASSWORD: ${APP_IMMICH_DB_PASSWORD}
-      DB_DATABASE_NAME: ${APP_IMMICH_DB_DATABASE_NAME}
+      DB_USERNAME: ${APP_LEVMA_IMMICH_DB_USERNAME}
+      DB_PASSWORD: ${APP_LEVMA_IMMICH_DB_PASSWORD}
+      DB_DATABASE_NAME: ${APP_LEVMA_IMMICH_DB_DATABASE_NAME}
       REDIS_HOSTNAME: levma-immich-redis
-      LOG_LEVEL: ${APP_IMMICH_LOG_LEVEL}
+      LOG_LEVEL: ${APP_LEVMA_IMMICH_LOG_LEVEL}
       JWT_SECRET: ${APP_SEED}
-      DISABLE_REVERSE_GEOCODING: ${APP_IMMICH_DISABLE_REVERSE_GEOCODING}
-      REVERSE_GEOCODING_PRECISION: ${APP_IMMICH_REVERSE_GEOCODING_PRECISION}
-      PUBLIC_LOGIN_PAGE_MESSAGE: ${APP_IMMICH_PUBLIC_LOGIN_PAGE_MESSAGE}
+      DISABLE_REVERSE_GEOCODING: ${APP_LEVMA_IMMICH_DISABLE_REVERSE_GEOCODING}
+      REVERSE_GEOCODING_PRECISION: ${APP_LEVMA_IMMICH_REVERSE_GEOCODING_PRECISION}
+      PUBLIC_LOGIN_PAGE_MESSAGE: ${APP_LEVMA_IMMICH_PUBLIC_LOGIN_PAGE_MESSAGE}
     depends_on:
       - postgres
     restart: always
@@ -81,19 +81,19 @@ services:
   immich-web:
     container_name: levma-immich-web
     hostname: levma-immich-web
-    image: "altran1502/immich-web:${APP_IMMICH_VERSION}"
+    image: "altran1502/immich-web:${APP_LEVMA_IMMICH_VERSION}"
     entrypoint: ["/bin/sh", "./entrypoint.sh"]
     environment:
       DB_HOSTNAME: levma-immich-postgres
-      DB_USERNAME: ${APP_IMMICH_DB_USERNAME}
-      DB_PASSWORD: ${APP_IMMICH_DB_PASSWORD}
-      DB_DATABASE_NAME: ${APP_IMMICH_DB_DATABASE_NAME}
+      DB_USERNAME: ${APP_LEVMA_IMMICH_DB_USERNAME}
+      DB_PASSWORD: ${APP_LEVMA_IMMICH_DB_PASSWORD}
+      DB_DATABASE_NAME: ${APP_LEVMA_IMMICH_DB_DATABASE_NAME}
       REDIS_HOSTNAME: levma-immich-redis
-      LOG_LEVEL: ${APP_IMMICH_LOG_LEVEL}
+      LOG_LEVEL: ${APP_LEVMA_IMMICH_LOG_LEVEL}
       JWT_SECRET: ${APP_SEED}
-      DISABLE_REVERSE_GEOCODING: ${APP_IMMICH_DISABLE_REVERSE_GEOCODING}
-      REVERSE_GEOCODING_PRECISION: ${APP_IMMICH_REVERSE_GEOCODING_PRECISION}
-      PUBLIC_LOGIN_PAGE_MESSAGE: ${APP_IMMICH_PUBLIC_LOGIN_PAGE_MESSAGE}
+      DISABLE_REVERSE_GEOCODING: ${APP_LEVMA_IMMICH_DISABLE_REVERSE_GEOCODING}
+      REVERSE_GEOCODING_PRECISION: ${APP_LEVMA_IMMICH_REVERSE_GEOCODING_PRECISION}
+      PUBLIC_LOGIN_PAGE_MESSAGE: ${APP_LEVMA_IMMICH_PUBLIC_LOGIN_PAGE_MESSAGE}
     restart: always
 
   redis:
@@ -108,9 +108,9 @@ services:
     image: postgres:14
     user: "1000:1000"
     environment:
-      POSTGRES_USER: ${APP_IMMICH_DB_USERNAME}
-      POSTGRES_PASSWORD: ${APP_IMMICH_DB_PASSWORD}
-      POSTGRES_DB: ${APP_IMMICH_DB_DATABASE_NAME}
+      POSTGRES_USER: ${APP_LEVMA_IMMICH_DB_USERNAME}
+      POSTGRES_PASSWORD: ${APP_LEVMA_IMMICH_DB_PASSWORD}
+      POSTGRES_DB: ${APP_LEVMA_IMMICH_DB_DATABASE_NAME}
       PG_DATA: /var/lib/postgresql/data
     volumes:
       - ${APP_DATA_DIR}/pgdata:/var/lib/postgresql/data
