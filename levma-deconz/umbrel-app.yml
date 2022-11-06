@@ -2,7 +2,7 @@ manifestVersion: 1
 id: levma-deconz
 category: Automation
 name: deCONZ
-version: "2.19.01.01"
+version: "2.19.01.02"
 tagline: Control software for Zigbee networks
 description: >-
   deCONZ is an easy to use control software, with which you can set up and control Zigbee networks of any size without further programming effort.
