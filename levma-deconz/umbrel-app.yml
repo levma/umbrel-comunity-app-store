@@ -2,7 +2,7 @@ manifestVersion: 1
 id: levma-deconz
 category: Automation
 name: deCONZ
-version: "2.19.01.02"
+version: "2.19.01.03"
 tagline: Control software for Zigbee networks
 description: >-
   deCONZ is an easy to use control software, with which you can set up and control Zigbee networks of any size without further programming effort.
@@ -17,11 +17,8 @@ dependencies: []
 repo: https://github.com/deconz-community/deconz-docker
 support: ""
 port: 8183
-icon: https://www.dresden-elektronik.com/assets/images/7/logo-d8637469.svg
+icon: https://www.phoscon.de/img/phoscon-logo128x.svg
 gallery:
   - https://www.dresden-elektronik.com/files/dresden-elektronik/content/funktechnik/deCONZ_identify.png
   - https://www.dresden-elektronik.com/files/dresden-elektronik/content/funktechnik/deCONZ_nodes1.png
   - https://www.dresden-elektronik.com/files/dresden-elektronik/content/funktechnik/deCONZ_nodes2.png
-path: ""
-defaultUsername: ""
-defaultPassword: ""
