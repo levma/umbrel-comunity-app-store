@@ -9,7 +9,7 @@ services:
 
   deconz:
     image: deconzcommunity/deconz:2.19.02@sha256:b3e01e551a79410b7ac84cd814b09c7ac48aa732be730bcbade4ab8e7c425893
-    restart: always
+    restart: on-failure
     privileged: true
     user: "1000:1000"
     ports:
