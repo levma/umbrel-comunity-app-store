@@ -3,29 +3,30 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: ${APP_LEVMA_DECONZ_HOST}
-      APP_PORT: ${APP_LEVMA_DECONZ_WEB_PORT}
+      APP_HOST: ${APP_LEVMA_PHOSCON_IP}
+      APP_PORT: ${APP_LEVMA_PHOSCON_WEB_PORT}
       PROXY_AUTH_ADD: "false"
 
   deconz:
-    image: "deconzcommunity/deconz:${APP_LEVMA_DECONZ_VERSION}"
-    container_name: levma-deconz
-    hostname: ${APP_LEVMA_DECONZ_HOST}
+    image: deconzcommunity/deconz:2.19.02@sha256:b3e01e551a79410b7ac84cd814b09c7ac48aa732be730bcbade4ab8e7c425893
     restart: always
     privileged: true
     user: "1000:1000"
     ports:
-      - "${APP_LEVMA_DECONZ_WS_PORT}:${APP_LEVMA_DECONZ_WS_PORT}"
-      - "${APP_LEVMA_DECONZ_VNC_PORT}:${APP_LEVMA_DECONZ_VNC_PORT}"
-      - "${APP_LEVMA_DECONZ_NOVNC_PORT}:${APP_LEVMA_DECONZ_NOVNC_PORT}"
+      - "${APP_LEVMA_PHOSCON_WS_PORT}:${APP_LEVMA_PHOSCON_WS_PORT}"
+      - "${APP_LEVMA_PHOSCON_VNC_PORT}:${APP_LEVMA_PHOSCON_VNC_PORT}"
+      - "${APP_LEVMA_PHOSCON_NOVNC_PORT}:${APP_LEVMA_PHOSCON_NOVNC_PORT}"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /${APP_DATA_DIR}/data:/opt/deCONZ
     devices:
-      - "${APP_LEVMA_DECONZ_DEVICE}"
+      - ${APP_LEVMA_PHOSCON_DEVICE}
+    networks:
+      default:
+        ipv4_address: ${APP_LEVMA_PHOSCON_IP}
     environment:
-      DECONZ_WEB_PORT: ${APP_LEVMA_DECONZ_WEB_PORT}
-      DECONZ_WS_PORT: ${APP_LEVMA_DECONZ_WS_PORT}
+      DECONZ_WEB_PORT: ${APP_LEVMA_PHOSCON_WEB_PORT}
+      DECONZ_WS_PORT: ${APP_LEVMA_PHOSCON_WS_PORT}
       DEBUG_INFO: 1
       DEBUG_APS: 0
       DEBUG_ZCL: 0
@@ -33,10 +34,8 @@ services:
       DEBUG_OTA: 0
       DEBUG_HTTP: 0
       DECONZ_START_VERBOSE: 0
-      DECONZ_DEVICE: ${APP_LEVMA_DECONZ_DEVICE}
-      DECONZ_UID: 1000
-      DECONG_GID: 1000
+      DECONZ_DEVICE: ${APP_LEVMA_PHOSCON_DEVICE}
       DECONZ_VNC_MODE: 1
-      DECONZ_VNC_PORT: ${APP_LEVMA_DECONZ_VNC_PORT}
-      DECONZ_NOVNC_PORT: ${APP_LEVMA_DECONZ_NOVNC_PORT}
+      DECONZ_VNC_PORT: ${APP_LEVMA_PHOSCON_VNC_PORT}
       DECONZ_VNC_PASSWORD: ${APP_PASSWORD}
+      DECONZ_NOVNC_PORT: ${APP_LEVMA_PHOSCON_NOVNC_PORT}
