@@ -2,7 +2,7 @@ manifestVersion: 1
 id: levma-phoscon
 category: Automation
 name: Phoscon
-version: "2.19.02-build5"
+version: "2.19.02-build6"
 tagline: Control software for Zigbee networks
 description: >-
   The Phoscon App is a powerful tool to configure and control small and large smart light installations. Specializing in the popular wireless standard Zigbee, the Phoscon App supports a steadily growing number of lights, sensors and switches from various well-known manufacturers.
